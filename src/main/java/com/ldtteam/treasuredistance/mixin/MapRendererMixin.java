@@ -4,6 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
@@ -12,7 +13,6 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import org.joml.Vector2d;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -37,10 +37,11 @@ public class MapRendererMixin
                     final double x = subTag.getDouble("x");
                     final double z = subTag.getDouble("z");
 
-                    final Vector2d goalVec = new Vector2d(x, z);
-                    final Vector2d targetVec = new Vector2d(player.getX(), player.getZ());
+                    final BlockPos goalVec = new BlockPos(x, 0, z);
+                    final BlockPos targetVec = new BlockPos(player.getX(), 0, player.getZ());
 
-                    final int dist = (int) goalVec.distance(targetVec);
+                    final int dist = goalVec.distManhattan(targetVec);
+
                     Font font = Minecraft.getInstance().font;
                     Component component = Component.literal(dist + "blocks");
                     float f6 = (float) font.width(component);
@@ -49,7 +50,7 @@ public class MapRendererMixin
                     p_93292_.translate(0.0F + 64.0F - f6 * f7 / 2.0F, 0.0F + 64.0F + 4.0F, -0.025F);
                     p_93292_.scale(f7, f7, 1.0F);
                     p_93292_.translate(0.0F, 0.0F, -0.1F);
-                    font.drawInBatch(component, 0.0F, 0.0F, -1, false, p_93292_.last().pose(), p_93293_, Font.DisplayMode.NORMAL, Integer.MIN_VALUE, p_93295_);
+                    font.drawInBatch(component, 0.0F, 0.0F, -1, false, p_93292_.last().pose(), p_93293_, false, Integer.MIN_VALUE, p_93295_);
                     p_93292_.popPose();
 
                     break;
