@@ -42,7 +42,7 @@ public class MapRendererMixin
 
                     final int dist = (int) goalVec.distance(targetVec);
                     Font font = Minecraft.getInstance().font;
-                    Component component = Component.literal(dist + "blocks");
+                    Component component = Component.literal(dist + " Blocks");
                     float f6 = (float) font.width(component);
                     float f7 = Mth.clamp(25.0F / f6, 0.0F, 6.0F / 9.0F);
                     p_93292_.pushPose();
