@@ -32,7 +32,8 @@ public class MapRendererMixin
             for (int i = 0; i < listTag.size(); i++)
             {
                 final CompoundTag subTag = listTag.getCompound(i);
-                if (subTag.getByte("type") == 26)
+                final byte type = subTag.getByte("type");
+                if (type == 26 || type == 9)
                 {
                     final double x = subTag.getDouble("x");
                     final double z = subTag.getDouble("z");
