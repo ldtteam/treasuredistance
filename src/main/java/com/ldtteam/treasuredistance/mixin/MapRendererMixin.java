@@ -33,7 +33,7 @@ public class MapRendererMixin
             {
                 final CompoundTag subTag = listTag.getCompound(i);
                 final byte type = subTag.getByte("type");
-                if (type == 26 || type == 9)
+                if (type > 1 && subTag.contains("x") && subTag.contains("z"))
                 {
                     final double x = subTag.getDouble("x");
                     final double z = subTag.getDouble("z");
