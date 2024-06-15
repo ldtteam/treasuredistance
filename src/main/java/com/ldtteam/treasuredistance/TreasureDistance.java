@@ -1,6 +1,6 @@
 package com.ldtteam.treasuredistance;
 
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.fml.common.Mod;
 
 @Mod("treasuredistance")
 public class TreasureDistance
